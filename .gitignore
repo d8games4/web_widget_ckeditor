@@ -72,8 +72,6 @@ docs/_build/
 *~
 *.swp
 
-# OCA rules
-!static/lib/
 
 # Auto-generated
 ChangeLog
