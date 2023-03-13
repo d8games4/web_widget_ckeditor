@@ -3,6 +3,7 @@
     @author Iván Todorovich <ivan.todorovich@camptocamp.com>
     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 */
+
 odoo.define("web_widget_ckeditor.field_ckeditor", function (require) {
     "use strict";
 
@@ -158,32 +159,51 @@ odoo.define("web_widget_ckeditor.field_ckeditor", function (require) {
                     console.warn("Using default toolbar configuration");
                 }
                 return [
-                    "heading",
-                    "|",
-                    "bold",
-                    "italic",
-                    "underline",
-                    "removeFormat",
-                    "|",
-                    "fontSize",
-                    "fontColor",
-                    "fontBackgroundColor",
-                    "|",
-                    "bulletedList",
-                    "numberedList",
-                    "alignment",
-                    "|",
-                    "outdent",
-                    "indent",
-                    "pagebreak",
-                    "|",
-                    "link",
-                    "imageUpload",
-                    "blockQuote",
-                    "insertTable",
-                    "|",
-                    "undo",
-                    "redo",
+                    'undo',
+                    'redo',
+                    'findAndReplace',
+                    'pageBreak',
+                    'restrictedEditingException',
+                    '|',
+                    'heading',
+                    '|',
+                    'style',
+                    '|',
+                    'textPartLanguage',
+                    '|',
+                    'fontFamily',
+                    'fontSize',
+                    'fontColor',
+                    'fontBackgroundColor',
+                    'highlight',
+                    '|',
+                    'bold',
+                    'italic',
+                    'underline',
+                    'strikethrough',
+                    'superscript',
+                    'subscript',
+                    'removeFormat',
+                    '|',
+                    'alignment',
+                    'indent',
+                    'outdent',
+                    '|',
+                    'bulletedList',
+                    'numberedList',
+                    'todoList',
+                    '|',
+                    'link',
+                    'specialCharacters',
+                    'blockQuote',
+                    'insertTable',
+                    'imageUpload',
+                    'horizontalLine',
+                    '|',
+                    'code',
+                    'codeBlock',
+                    'htmlEmbed',
+                    'mediaEmbed',
                 ];
             },
             /**
@@ -202,11 +222,12 @@ odoo.define("web_widget_ckeditor.field_ckeditor", function (require) {
                     language: CKEditorLanguageCode,
                     image: {
                         toolbar: [
-                            "imageTextAlternative",
-                            "imageStyle:inline",
-                            "imageStyle:block",
-                            "imageStyle:side",
-                            "linkImage",
+                            'imageTextAlternative',
+                            'toggleImageCaption',
+                            'imageStyle:inline',
+                            'imageStyle:block',
+                            'imageStyle:side',
+                            'linkImage'
                         ],
                     },
                     table: {
@@ -217,6 +238,218 @@ odoo.define("web_widget_ckeditor.field_ckeditor", function (require) {
                             "tableCellProperties",
                             "tableProperties",
                         ],
+                    },
+                    fontSize: {
+                        options: [10, 12, 14, 18, 24, 30, 36, 48, 60, 72],
+                    },
+                    fontFamily: {
+                        options: [
+                            'Droid Arabic Kufi Bold',
+                            'Droid Arabic Kufi',
+                            'Amiri Quran',
+                            'Aref Ruqaa Regula',
+                            'Arial, Helvetica, sans-serif',
+                            'Arvo',
+                            'BFantezy',
+                            'Courier New, Courier, monospace',
+                            'ElMessiri',
+                            'Georgia, serif',
+                            'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                            'Noto Serif',
+                            'Open Sans',
+                            'Raleway',
+                            'Roboto',
+                            'Source Sans Pro',
+                            'Sultan Bold',
+                            'Ulamjad',
+                            'Verdana, Geneva, sans-serif',
+                        ]
+                    },
+                    fontColor: {
+                        colors: [
+                            {
+                                color: 'hsl(0, 0%, 0%)',
+                                label: 'Black'
+                            },
+                            {
+                                color: 'hsl(0, 0%, 30%)',
+                                label: 'Dim grey'
+                            },
+                            {
+                                color: 'hsl(0, 0%, 60%)',
+                                label: 'Grey'
+                            },
+                            {
+                                color: 'hsl(0, 0%, 90%)',
+                                label: 'Light grey'
+                            },
+
+                            {
+                                color: 'hsl(0, 75%, 60%)',
+                                label: 'Red'
+                            },
+                            {
+                                color: 'hsl(30, 75%, 60%)',
+                                label: 'Orange'
+                            },
+                            {
+                                color: 'hsl(60, 75%, 60%)',
+                                label: 'Yellow'
+                            },
+                            {
+                                color: 'hsl(90, 75%, 60%)',
+                                label: 'Light green'
+                            },
+                            {
+                                color: 'hsl(120, 75%, 60%)',
+                                label: 'Green'
+                            },
+                            {
+                                color: 'hsl(150, 75%, 60%)',
+                                label: 'Aquamarine'
+                            },
+                            {
+                                color: 'hsl(180, 75%, 60%)',
+                                label: 'Turquoise'
+                            },
+                            {
+                                color: 'hsl(210, 75%, 60%)',
+                                label: 'Light blue'
+                            },
+                            {
+                                color: 'hsl(240, 75%, 60%)',
+                                label: 'Blue'
+                            },
+                            {
+                                color: 'hsl(270, 75%, 60%)',
+                                label: 'Purple'
+                            }
+                        ]
+                    },
+                    fontBackgroundColor: {
+                        colors: [
+                            {
+                                color: 'hsl(0, 0%, 0%)',
+                                label: 'Black'
+                            },
+                            {
+                                color: 'hsl(0, 0%, 30%)',
+                                label: 'Dim grey'
+                            },
+                            {
+                                color: 'hsl(0, 0%, 60%)',
+                                label: 'Grey'
+                            },
+                            {
+                                color: 'hsl(0, 0%, 90%)',
+                                label: 'Light grey'
+                            },
+                            {
+                                color: 'hsl(0, 0%, 100%)',
+                                label: 'White',
+                                hasBorder: true
+                            },
+                            {
+                                color: 'hsl(0, 75%, 60%)',
+                                label: 'Red'
+                            },
+                            {
+                                color: 'hsl(30, 75%, 60%)',
+                                label: 'Orange'
+                            },
+                            {
+                                color: 'hsl(60, 75%, 60%)',
+                                label: 'Yellow'
+                            },
+                            {
+                                color: 'hsl(90, 75%, 60%)',
+                                label: 'Light green'
+                            },
+                            {
+                                color: 'hsl(120, 75%, 60%)',
+                                label: 'Green'
+                            },
+                            {
+                                color: 'hsl(150, 75%, 60%)',
+                                label: 'Aquamarine'
+                            },
+                            {
+                                color: 'hsl(180, 75%, 60%)',
+                                label: 'Turquoise'
+                            },
+                            {
+                                color: 'hsl(210, 75%, 60%)',
+                                label: 'Light blue'
+                            },
+                            {
+                                color: 'hsl(240, 75%, 60%)',
+                                label: 'Blue'
+                            },
+                            {
+                                color: 'hsl(270, 75%, 60%)',
+                                label: 'Purple'
+                            }
+                        ]
+                    },
+                    heading: {
+                        options: [
+                            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                            { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                            { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                            { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+                        ],
+                    },
+                    style: {
+                        definitions: [
+                            {
+                                name: 'Article category',
+                                element: 'h3',
+                                classes: ['category']
+                            },
+                            {
+                                name: 'Title',
+                                element: 'h2',
+                                classes: ['document-title']
+                            },
+                            {
+                                name: 'Subtitle',
+                                element: 'h3',
+                                classes: ['document-subtitle']
+                            },
+                            {
+                                name: 'Info box',
+                                element: 'p',
+                                classes: ['info-box']
+                            },
+                            {
+                                name: 'Side quote',
+                                element: 'blockquote',
+                                classes: ['side-quote']
+                            },
+                            {
+                                name: 'Marker',
+                                element: 'span',
+                                classes: ['marker']
+                            },
+                            {
+                                name: 'Spoiler',
+                                element: 'span',
+                                classes: ['spoiler']
+                            },
+                            {
+                                name: 'Code (dark)',
+                                element: 'pre',
+                                classes: ['fancy-code', 'fancy-code-dark']
+                            },
+                            {
+                                name: 'Code (bright)',
+                                element: 'pre',
+                                classes: ['fancy-code', 'fancy-code-bright']
+                            }
+                        ]
                     },
                 };
                 if (config.isDebug()) {
@@ -244,6 +477,9 @@ odoo.define("web_widget_ckeditor.field_ckeditor", function (require) {
                     (ev, name, isFocused) => (isFocused ? null : this._onChange())
                 );
                 this._onLoadCKEditor();
+                // Enere didn't work whe build was upgraded - Ahmed Addawody -
+                this.ckeditor.keystrokes.set( 'enter', 'enter' );
+                this.ckeditor.keystrokes.set( 'Shift+enter', 'shiftEnter' );
             },
             /**
              * @override
