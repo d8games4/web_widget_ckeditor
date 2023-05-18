@@ -22,19 +22,19 @@
                 rel="stylesheet"
                 href="/web_widget_ckeditor/static/src/scss/web_widget_ckeditor.scss"
             />
+            <link
+                rel="stylesheet"
+                href="/web_widget_ckeditor/static/src/scss/fonts.scss"
+            />
         </xpath>
     </template>
 
-    <data noupdate="1">
-        <template id="assets_backend" inherit_id="web._assets_primary_variables">
+    <template id="report_assets_common" inherit_id="web.report_assets_common">
             <xpath expr="//link[last()]" position="after">
-                <link
-                    rel="stylesheet"
-                    href="/web_widget_ckeditor/static/src/scss/add_primary_variables.scss"
-                />
+                <link rel="stylesheet" href="/web_widget_ckeditor/static/src/scss/fonts.scss"/>
             </xpath>
-        </template>
-    </data>
+    </template>
+
      <!--
     <data noupdate="1">
     -->
