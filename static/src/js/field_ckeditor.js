@@ -219,7 +219,13 @@ odoo.define("web_widget_ckeditor.field_ckeditor", function (require) {
                         items: await this._getCKEditorToolbarItems(),
                         shouldNotGroupWhenFull: true,
                     },
-                    language: CKEditorLanguageCode,
+                    language: {
+                        CKEditorLanguageCode,
+                        textPartLanguage: [
+                            { title: 'Arabic', languageCode: 'ar' },
+                            { title: 'English', languageCode: 'en' },
+                        ]
+                    },
                     image: {
                         toolbar: [
                             'imageTextAlternative',
